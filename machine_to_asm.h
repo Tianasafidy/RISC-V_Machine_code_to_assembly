@@ -50,4 +50,33 @@ const char * normal_register[32] = {"zero",
 				 "t5", 
 				 "t6"};  
 
+uint32_t get_rd_reg(uint32_t hex_code);
+
+const char * get_I_Type1_inst(uint32_t hex_code);
+
+const char * get_R_Type_inst(uint32_t hex_code);
+uint32_t get_rs1_reg(uint32_t hex_code);
+
+const char * get_I_Type2_inst(uint32_t hex_code);
+
+const char * get_I_Type3_inst(uint32_t hex_code);
+
+const char * get_I_Type4_inst(uint32_t hex_code); 
+
+const char * get_I_Type5_inst(uint32_t hex_code);
+
+
+const char * get_U_Type1_inst(uint32_t hex_code);
+
+
+const char * get_SB_Type_inst(uint32_t hex_code);
+const char * get_U_Type2_inst(uint32_t hex_code);
+
+const char * get_UJ_Type_inst(uint32_t hex_code);
+const char * get_S_Type_inst(uint32_t hex_code);
+
+void get_instruct(uint32_t hex_code);
+void to_binary(uint32_t  num, char *bin) ;
+void initialize_buff(char * buff , uint32_t size);
+
 #endif 
