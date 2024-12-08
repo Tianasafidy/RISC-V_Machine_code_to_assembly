@@ -226,19 +226,38 @@ void get_instruct(uint32_t hex_code){
 	
 	if(_opcode == OPCODE_I_Type1){
 		const char * inst = get_I_Type1_inst(hex_code); 
-		printf("%s ", inst );			
-	}else if(_opcode == OPCODE_I_Type2){
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)]; 
+		uint16_t _imm = get_imm_31_25(hex_code);	 
+		printf("%s %s, %s , #%d", inst, _rd, _rs1,_imm );
+			
+	}else if(_opcode == OPCODE_I_Type2){	
 		const char * inst = get_I_Type2_inst(hex_code); 
-		printf("%s ", inst );
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)]; 
+		uint16_t _imm = get_imm_31_25(hex_code);	 
+		printf("%s %s, %s , #%d", inst, _rd, _rs1,_imm );
+
 	}else if(_opcode == OPCODE_I_Type3){
 		const char * inst = get_I_Type3_inst(hex_code); 
-		printf("%s ", inst );
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)]; 
+		uint16_t _imm = get_imm_31_25(hex_code);	 
+		printf("%s %s, %s , #%d", inst, _rd, _rs1,_imm );
+
 	}else if(_opcode == OPCODE_I_Type4){
 		const char * inst = get_I_Type4_inst(hex_code); 
-		printf("%s ", inst );
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)]; 
+		uint16_t _imm = get_imm_31_25(hex_code);	 
+		printf("%s %s, %s , #%d", inst, _rd, _rs1,_imm );
+
 	}else if(_opcode == OPCODE_I_Type5){
 		const char * inst = get_I_Type5_inst(hex_code); 
-		printf("%s ", inst );
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)]; 
+		uint16_t _imm = get_imm_31_25(hex_code);	 
+		printf("%s %s, %s , #%d", inst, _rd, _rs1,_imm );
 	}else if(_opcode == OPCODE_R_Type){
 		const char * inst = get_R_Type_inst(hex_code); 
 		printf("%s ", inst );
