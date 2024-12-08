@@ -260,7 +260,10 @@ void get_instruct(uint32_t hex_code){
 		printf("%s %s, %s , #%d", inst, _rd, _rs1,_imm );
 	}else if(_opcode == OPCODE_R_Type){
 		const char * inst = get_R_Type_inst(hex_code); 
-		printf("%s ", inst );
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)]; 
+		const char * _rs2 = normal_register[get_rs2_reg(hex_code)]; 
+		printf("%s %s, %s , %s", inst, _rd, _rs1,_rs2 );
 	}else if(_opcode == OPCODE_S_Type){
 		const char * inst = get_S_Type_inst(hex_code); 
 		printf("%s ", inst );
@@ -272,11 +275,25 @@ void get_instruct(uint32_t hex_code){
 		printf("%s ", inst );
 	}else if(_opcode == OPCODE_SB_Type){
 		const char * inst = get_SB_Type_inst(hex_code); 
-		printf("%s ", inst );
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)];
+		const char * _rs2 = normal_register[get_rs2_reg(hex_code)]; 
+		uint16_t _imm = get_SB_Imm(hex_code);  		
+		printf("%s %s, %s , #%d", inst, _rs1,_rs2, _imm );
 	}else if(_opcode == OPCODE_UJ_Type){
 		const char * inst = get_UJ_Type_inst(hex_code); 
 		printf("%s ", inst );
 	} 
+}
+
+uint16_t get_SB_Imm(uint32_t hex_code){
+	static uint16_t _imm, _b12 , _b11, _imm_4_1, _imm_10_5; 
+	_imm = 0; 
+	_b12 = (hex_code >> 31) ; 
+	_b11 = (hex_code >> 7) & 0x1; 
+	_imm_4_1 = (hex_code >> 8) & 0xf; 
+	_imm_10_5 = (hex_code >> 25) & 0x3f; 
+	_imm = (_b11 << 12) & (_b11 << 11) & (_imm_10_5 << 5) & (_imm_4_1 << 1); 
+	return _imm;  	
 }
 
 void to_binary(uint32_t  num, char *bin) {
