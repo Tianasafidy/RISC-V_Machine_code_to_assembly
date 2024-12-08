@@ -18,12 +18,14 @@
 
   
 
-uint32_t get_rd_reg(uint32_t hex_code);
+uint8_t get_rs2_reg(uint32_t hex_code);
+uint8_t get_rs1_reg(uint32_t hex_code);
+uint16_t get_imm_31_25(uint32_t hex_code);
+uint8_t get_rd_reg(uint32_t hex_code);
 
 const char * get_I_Type1_inst(uint32_t hex_code);
 
 const char * get_R_Type_inst(uint32_t hex_code);
-uint32_t get_rs1_reg(uint32_t hex_code);
 
 const char * get_I_Type2_inst(uint32_t hex_code);
 

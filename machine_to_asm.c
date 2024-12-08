@@ -37,19 +37,26 @@ static const char * normal_register[32] = {"zero",
 				 "t5", 
 				 "t6"};
 
-uint32_t get_rd_reg(uint32_t hex_code){
+uint16_t get_imm_31_25(uint32_t hex_code){
+	static uint16_t _imm; 
+	_imm = (hex_code >> 20) & 0xfff; 
+	return _imm; 
+}
+
+
+uint8_t get_rd_reg(uint32_t hex_code){
 	static uint8_t _rd_reg; 
 	_rd_reg = (hex_code >> 7 ) & 0x1f ; 
 	return _rd_reg; 
 }
 
-uint32_t get_rs1_reg(uint32_t hex_code){
+uint8_t get_rs1_reg(uint32_t hex_code){
 	static uint8_t _rs1_reg; 
 	_rs1_reg = (hex_code >> 15) & 0x1F; 
 	return _rs1_reg; 
 }
 
-uint32_t get_rs2_reg(uint32_t hex_code){
+uint8_t get_rs2_reg(uint32_t hex_code){
 	static uint8_t _rs2_reg; 
 	_rs2_reg = (hex_code >> 20) & 0x1F; 
 	return _rs2_reg; 
