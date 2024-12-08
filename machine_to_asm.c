@@ -285,7 +285,7 @@ void get_instruct(uint32_t hex_code){
 		const char * _rs1 = normal_register[get_rs1_reg(hex_code)];
 		const char * _rs2 = normal_register[get_rs2_reg(hex_code)]; 
 		uint16_t _imm = get_SB_Imm(hex_code);  		
-		printf("%s %s, %s , #%d", inst, _rs1,_rs2, _imm );
+		printf("%s %s, %s , #%x", inst, _rs1,_rs2, _imm );
 	}else if(_opcode == OPCODE_UJ_Type){
 		const char * inst = get_UJ_Type_inst(hex_code); 
 		uint32_t _imm  = get_UJ_Imm(hex_code); 
@@ -301,7 +301,9 @@ uint16_t get_SB_Imm(uint32_t hex_code){
 	_b11 = (hex_code >> 7) & 0x1; 
 	_imm_4_1 = (hex_code >> 8) & 0xf; 
 	_imm_10_5 = (hex_code >> 25) & 0x3f; 
-	_imm = (_b11 << 12) & (_b11 << 11) & (_imm_10_5 << 5) & (_imm_4_1 << 1); 
+	//printf("_imm_4_1 = %d", _imm_4_1); 
+	//printf("_imm_10_5 = %d", _imm_10_5);
+	_imm = (_b12 << 12) | (_b11 << 11) | (_imm_10_5 << 5) | (_imm_4_1 << 1); 
 	return _imm;  	
 }
 
@@ -316,11 +318,12 @@ uint16_t get_S_Imm(uint32_t hex_code){
 
 uint32_t get_UJ_Imm(uint32_t hex_code){
 	static uint32_t _imm, _b20, _b11, _imm_10_1, _imm_19_12;
+	_imm = 0; 
 	_b20 = (hex_code >> 31); 
 	_b11 = (hex_code >> 20) & 0x1; 
 	_imm_19_12 = (hex_code >> 12) & 0xff ; //8bits  
 	_imm_10_1 = (hex_code >> 21) & 0x3ff ; //10 bits 
-	_imm = (_b20 << 20) & (_imm_19_12 << 12) & (_b11 << 11) & (_imm_10_1 << 1);  //@TODO : I'm not sure that the shift left is already added here
+	_imm = (_b20 << 20) |  (_imm_19_12 << 12) | (_b11 << 11) | (_imm_10_1 << 1);  //@TODO : I'm not sure that the shift left is already added here
 	return _imm; 
 }
 
