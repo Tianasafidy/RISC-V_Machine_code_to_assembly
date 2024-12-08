@@ -15,6 +15,12 @@ uint32_t get_rs1_reg(uint32_t hex_code){
 	_rs1_reg = (hex_code >> 15) & 0x1F; 
 	return _rs1_reg; 
 }
+
+uint32_t get_rs2_reg(uint32_t hex_code){
+	static uint8_t _rs2_reg; 
+	_rs2_reg = (hex_code >> 20) & 0x1F; 
+	return _rs2_reg; 
+}
 const char * get_R_Type_inst(uint32_t hex_code){
 	static uint8_t _funct3, _funct7; 
 	_funct3 = (uint8_t)((hex_code >> 12) & 0x00000007); 
