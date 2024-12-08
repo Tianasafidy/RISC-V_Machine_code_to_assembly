@@ -26,20 +26,25 @@ uint32_t hex_instruction[22] = {0x00050893,
                                 0xfff00513,
                                 0x00008067 };
 int main(void){
-	//char bin[32];
-	
-	/*for(int k = 0; k < 4; k++){
+	char bin[32];
+	int _addr = 0; 
+	// display binary machine code 	
+	for(int k = 0; k < 22; k++){
 		initialize_buff(bin, 32); 
-		to_binary(hex_instruction[k + 2], bin); 
-		printf("%d : ", k + 2);
+		to_binary(hex_instruction[k], bin);
+		printf("%x : ", _addr);
+		_addr += 4;  
 		for(int j = 0 ; j < 32; j ++){
 			printf("%c", bin[j]); 
 		}
 		printf("\n");   
-	}*/
+	}
 	
+	_addr = 0; 
+	//display the assembly code
 	for(int i = 0; i <22 ; i++){
-		printf("%d : ", i); 
+		printf("%x : ", _addr); 
+		_addr += 4;  
 		get_instruct(hex_instruction[i]); 
 		printf("\n"); 
 	}
