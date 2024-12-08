@@ -272,10 +272,14 @@ void get_instruct(uint32_t hex_code){
 		printf("%s %s, %s , #%d", inst, _rs1,_rs2, _imm );
 	}else if(_opcode == OPCODE_U_Type1){
 		const char * inst = get_U_Type1_inst(hex_code); 
-		printf("%s ", inst );
+		uint32_t _imm = get_U_Imm(hex_code); 
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		printf("%s %s, #%d", inst, _rd, _imm );
 	}else if(_opcode == OPCODE_U_Type2){
 		const char * inst = get_U_Type2_inst(hex_code); 
-		printf("%s ", inst );
+		uint32_t _imm = get_U_Imm(hex_code); 
+		const char * _rd = normal_register[get_rd_reg(hex_code)]; 
+		printf("%s %s, #%d", inst, _rd, _imm );
 	}else if(_opcode == OPCODE_SB_Type){
 		const char * inst = get_SB_Type_inst(hex_code); 
 		const char * _rs1 = normal_register[get_rs1_reg(hex_code)];
@@ -284,7 +288,9 @@ void get_instruct(uint32_t hex_code){
 		printf("%s %s, %s , #%d", inst, _rs1,_rs2, _imm );
 	}else if(_opcode == OPCODE_UJ_Type){
 		const char * inst = get_UJ_Type_inst(hex_code); 
-		printf("%s ", inst );
+		uint32_t _imm  = get_UJ_Imm(hex_code); 
+		const char * _rd = normal_register[get_rd_reg(hex_code)];
+		printf("%s %s, #%d", inst, _rd, _imm); 		
 	} 
 }
 
@@ -306,6 +312,22 @@ uint16_t get_S_Imm(uint32_t hex_code){
 	_imm_11_5 = (hex_code >> 25); 
 	_imm = (_imm_11_5 << 5) & _imm_4_0;  
 	return _imm;  	
+}
+
+uint32_t get_UJ_Imm(uint32_t hex_code){
+	static uint32_t _imm, _b20, _b11, _imm_10_1, _imm_19_12;
+	_b20 = (hex_code >> 31); 
+	_b11 = (hex_code >> 20) & 0x1; 
+	_imm_19_12 = (hex_code >> 12) & 0xff ; //8bits  
+	_imm_10_1 = (hex_code >> 21) & 0x3ff ; //10 bits 
+	_imm = (_b20 << 20) & (_imm_19_12 << 12) & (_b11 << 11) & (_imm_10_1 << 1);  //@TODO : I'm not sure that the shift left is already added here
+	return _imm; 
+}
+
+uint32_t get_U_Imm(uint32_t hex_code){
+	static uint32_t _imm; 
+	_imm = (hex_code >> 12);
+	return _imm; 	
 }
 
 void to_binary(uint32_t  num, char *bin) {
