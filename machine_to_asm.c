@@ -266,7 +266,10 @@ void get_instruct(uint32_t hex_code){
 		printf("%s %s, %s , %s", inst, _rd, _rs1,_rs2 );
 	}else if(_opcode == OPCODE_S_Type){
 		const char * inst = get_S_Type_inst(hex_code); 
-		printf("%s ", inst );
+		const char * _rs1 = normal_register[get_rs1_reg(hex_code)]; 
+		const char * _rs2 = normal_register[get_rs2_reg(hex_code)];
+		uint16_t _imm = get_S_Imm(hex_code); 
+		printf("%s %s, %s , #%d", inst, _rs1,_rs2, _imm );
 	}else if(_opcode == OPCODE_U_Type1){
 		const char * inst = get_U_Type1_inst(hex_code); 
 		printf("%s ", inst );
@@ -293,6 +296,15 @@ uint16_t get_SB_Imm(uint32_t hex_code){
 	_imm_4_1 = (hex_code >> 8) & 0xf; 
 	_imm_10_5 = (hex_code >> 25) & 0x3f; 
 	_imm = (_b11 << 12) & (_b11 << 11) & (_imm_10_5 << 5) & (_imm_4_1 << 1); 
+	return _imm;  	
+}
+
+uint16_t get_S_Imm(uint32_t hex_code){
+	static uint16_t _imm, _imm_4_0, _imm_11_5; 
+	_imm = 0; 
+	_imm_4_0 = (hex_code >> 7) & 0x1F; 
+	_imm_11_5 = (hex_code >> 25); 
+	_imm = (_imm_11_5 << 5) & _imm_4_0;  
 	return _imm;  	
 }
 

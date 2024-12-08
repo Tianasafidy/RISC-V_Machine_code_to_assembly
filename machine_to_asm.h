@@ -17,6 +17,7 @@
 #define OPCODE_UJ_Type (0b1101111) //jal
 
   
+uint16_t get_S_Imm(uint32_t hex_code); 
 uint16_t get_SB_Imm(uint32_t hex_code); 
 
 uint8_t get_rs2_reg(uint32_t hex_code);
