@@ -17,40 +17,40 @@
 #define OPCODE_UJ_Type (0b1101111) //jal
 
   
-uint32_t get_UJ_Imm(uint32_t hex_code); 
-uint32_t get_U_Imm(uint32_t hex_code); 
-uint16_t get_S_Imm(uint32_t hex_code); 
-uint16_t get_SB_Imm(uint32_t hex_code); 
+int32_t get_UJ_Imm(int32_t hex_code); 
+int32_t get_U_Imm(int32_t hex_code); 
+int16_t get_S_Imm(int32_t hex_code); 
+int16_t get_SB_Imm(int32_t hex_code); 
 
-uint8_t get_rs2_reg(uint32_t hex_code);
-uint8_t get_rs1_reg(uint32_t hex_code);
-uint16_t get_imm_31_25(uint32_t hex_code);
-uint8_t get_rd_reg(uint32_t hex_code);
+int8_t get_rs2_reg(int32_t hex_code);
+int8_t get_rs1_reg(int32_t hex_code);
+int16_t get_imm_31_25(int32_t hex_code);
+int8_t get_rd_reg(int32_t hex_code);
 
-const char * get_I_Type1_inst(uint32_t hex_code);
+const char * get_I_Type1_inst(int32_t hex_code);
 
-const char * get_R_Type_inst(uint32_t hex_code);
+const char * get_R_Type_inst(int32_t hex_code);
 
-const char * get_I_Type2_inst(uint32_t hex_code);
+const char * get_I_Type2_inst(int32_t hex_code);
 
-const char * get_I_Type3_inst(uint32_t hex_code);
+const char * get_I_Type3_inst(int32_t hex_code);
 
-const char * get_I_Type4_inst(uint32_t hex_code); 
+const char * get_I_Type4_inst(int32_t hex_code); 
 
-const char * get_I_Type5_inst(uint32_t hex_code);
-
-
-const char * get_U_Type1_inst(uint32_t hex_code);
+const char * get_I_Type5_inst(int32_t hex_code);
 
 
-const char * get_SB_Type_inst(uint32_t hex_code);
-const char * get_U_Type2_inst(uint32_t hex_code);
+const char * get_U_Type1_inst(int32_t hex_code);
 
-const char * get_UJ_Type_inst(uint32_t hex_code);
-const char * get_S_Type_inst(uint32_t hex_code);
 
-void get_instruct(uint32_t hex_code);
-void to_binary(uint32_t  num, char *bin) ;
-void initialize_buff(char * buff , uint32_t size);
+const char * get_SB_Type_inst(int32_t hex_code);
+const char * get_U_Type2_inst(int32_t hex_code);
+
+const char * get_UJ_Type_inst(int32_t hex_code);
+const char * get_S_Type_inst(int32_t hex_code);
+
+void get_instruct(int32_t hex_code);
+void to_binary(int32_t  num, char *bin) ;
+void initialize_buff(char * buff , int32_t size);
 
 #endif 
